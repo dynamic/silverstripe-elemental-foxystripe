@@ -10,9 +10,8 @@ Elemental content blocks for FoxyStripe
 
 ## Requirements
 
-* silverstripe/recipe-cms: ^4@dev
-* dnadesign/silverstripe-elemental: ^4@dev
-* dynamic/foxystripe: ^4@dev
+* dnadesign/silverstripe-elemental: ^4.0
+* dynamic/foxystripe: ^4.0
 
 ## Installation
 
