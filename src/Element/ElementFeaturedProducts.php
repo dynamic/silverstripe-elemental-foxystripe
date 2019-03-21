@@ -7,11 +7,17 @@ use Dynamic\FoxyStripe\Page\ProductPage;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use SilverStripe\Versioned\GridFieldArchiveAction;
+use SilverStripe\ORM\FieldType\DBField;
 use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
 class ElementFeaturedProducts extends BaseElement
 {
+    /**
+     * @var string
+     */
+    private static $icon = 'font-icon-cart';
+
     /**
      * @var string
      */
@@ -29,6 +35,9 @@ class ElementFeaturedProducts extends BaseElement
         'Products' => ProductPage::class,
     ];
 
+    /**
+     * @var array
+     */
     private static $many_many_extraFields = [
         'Products' => [
             'SortOrder' => 'Int',
@@ -40,6 +49,18 @@ class ElementFeaturedProducts extends BaseElement
      */
     private static $table_name = 'ElementFeaturedProducts';
 
+    /**
+     * Set to false to prevent an in-line edit form from showing in an elemental area. Instead the element will be
+     * clickable and a GridFieldDetailForm will be used.
+     *
+     * @config
+     * @var bool
+     */
+    private static $inline_editable = false;
+
+    /**
+     * @return \SilverStripe\Forms\FieldList
+     */
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
@@ -70,6 +91,29 @@ class ElementFeaturedProducts extends BaseElement
         }
 
         return $fields;
+    }
+
+    /**
+     * @return DBHTMLText
+     */
+    public function getSummary()
+    {
+        if ($this->Products()->count() == 1) {
+            $label = ' product';
+        } else {
+            $label = ' products';
+        }
+        return DBField::create_field('HTMLText', $this->Products()->count() . ' ' . $label)->Summary(20);
+    }
+
+    /**
+     * @return array
+     */
+    protected function provideBlockSchema()
+    {
+        $blockSchema = parent::provideBlockSchema();
+        $blockSchema['content'] = $this->getSummary();
+        return $blockSchema;
     }
 
     /**

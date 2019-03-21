@@ -10,7 +10,9 @@ Elemental content blocks for FoxyStripe
 
 ## Requirements
 
-- SilverStripe 4.x
+* silverstripe/recipe-cms: ^4@dev
+* dnadesign/silverstripe-elemental: ^4@dev
+* dynamic/foxystripe: ^4@dev
 
 ## Installation
 
@@ -18,7 +20,7 @@ Elemental content blocks for FoxyStripe
 
 ## Example usage
 
-You use silverstripe-elemental-foxystripe like this.
+Allows you to select products to feature in a block.
 
 ## Documentation
 
