@@ -6,6 +6,7 @@ use DNADesign\Elemental\Models\BaseElement;
 use Dynamic\FoxyStripe\Page\ProductPage;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldAddNewButton;
+use SilverStripe\Versioned\GridFieldArchiveAction;
 use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
@@ -58,6 +59,7 @@ class ElementFeaturedProducts extends BaseElement
             $config->removeComponentsByType([
                 GridFieldAddExistingAutocompleter::class,
                 GridFieldAddNewButton::class,
+                GridFieldArchiveAction::class,
             ]);
             $config->addComponent(new GridFieldOrderableRows('SortOrder'));
             $config->addComponent(new GridFieldAddExistingSearchButton());
